@@ -1,0 +1,11 @@
+Makefile.PL
+MANIFEST
+README
+cksums.txt
+Changes
+t/Google-OAuth.t
+lib/Google/OAuth/Install.pm
+lib/Google/OAuth/Headers.pm
+lib/Google/OAuth/Config.pm
+lib/Google/OAuth.pm
+samples/local.pm
