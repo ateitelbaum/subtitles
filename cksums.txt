@@ -1,3 +1,0 @@
-3256281780 12328 lib/Google/OAuth/Install.pm
-3893620026 704 lib/Google/OAuth/Config.pm
-1527528991 30772 lib/Google/OAuth.pm
