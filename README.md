@@ -29,7 +29,7 @@ DOCUMENTATION
 
 Online documentation available at CPAN:
 
-  http://search.cpan.org/~tqisjim/Google-OAuth-0.03/lib/Google/OAuth.pm
+  http://search.cpan.org/~tqisjim/Google-OAuth-0.04/lib/Google/OAuth.pm
 
 SAMPLES
 
