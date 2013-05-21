@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Google-OAuth version 0.04
-=======
 Google-OAuth version 0.03
->>>>>>> 521e16e1563f097e5d11062eb98c153627ce2fd9
 =========================
 
 Google::OAuth manages Google's access tokens, and creates HTTP::Request
@@ -33,17 +29,7 @@ DOCUMENTATION
 
 Online documentation available at CPAN:
 
-<<<<<<< HEAD
-  http://search.cpan.org/~tqisjim/Google-OAuth-0.04/lib/Google/OAuth.pm
-
-SAMPLES
-
-Sample library to access Google Apps objects
-
-Sample library that extends Google::OAuth to Facebook
-=======
   http://search.cpan.org/~tqisjim/Google-OAuth-0.03/lib/Google/OAuth.pm
->>>>>>> 521e16e1563f097e5d11062eb98c153627ce2fd9
 
 COPYRIGHT AND LICENCE
 
