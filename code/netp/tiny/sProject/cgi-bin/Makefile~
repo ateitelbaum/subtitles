@@ -1,0 +1,10 @@
+CC = gcc
+CFLAGS = -O2 -Wall -I ..
+
+all: subtitles
+
+subtitles: subtitles.c
+	$(CC) $(CFLAGS) -o subtitles subtitles.c
+
+clean:
+	rm -f subtitles *~
