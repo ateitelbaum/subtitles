@@ -1,8 +1,4 @@
-/*It worked!!!*/
-/*
-  subtitles.c - a CGI program that returns a subtitle file
- */
-/* $begin subtitles */
+/*subtitles.c - a CGI program that returns a subtitle file*/
 #include "csapp.h"
 #include <regex.h>
 /*
@@ -19,17 +15,19 @@ int parseLink(char *line){
 */
 
 int main() {
+  char* xmldoc = "XMLdoc";
+  /*
   char* url = "file.//localhost/Users/rivkagreenberg/Documents/signup-submit.php?name=The+dark+night";
   char *buf, *p;
   char arg1[MAXLINE], content[MAXLINE];
   int n1=0, n2 = 0;
 
-  /* Extract the two arguments */
+  /* Extract the two arguments 
   if ((buf = getenv("QUERY_STRING")) != NULL) {
     printf("%s", arg1);
 	
   }
-
+  */
   
 
   rio_t rio;
@@ -43,19 +41,15 @@ int main() {
   
   char *getRequest = "GET http://subsmax.com/api/10/matrix HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n";
   Rio_writen(clientfd, getRequest, strlen(getRequest));
-  char result[1000];
-  int i;
-  for(i = 0; i < 1000; i++){
-    Rio_readlineb(&rio, result, 1000);
-    /* int x = parseLink(result);*/
-    /* printf("%d", result); */
+  char result[100000];
+  char buf[1000];
+  int x = 0;
+  int i = 0;
+  while(i = Rio_readlineb(&rio, buf, 1000)){
+    x+=i;
+    strcat(result, buf);
   }
-  
-  
-	 
-
-    
-
+  printf("%s", result);
     /* Make the response body */
     /*    sprintf(content, "Welcome to Ayliana's add.com: ");
     sprintf(content, "%sTHE Internet addition portal.\r\n<p>", content);
