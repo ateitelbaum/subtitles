@@ -78,6 +78,6 @@ int main() {
       }
   }
   char* l = XMLParser(result);
-  printf("%s", l);
+  return l;
   exit(0);
 }
