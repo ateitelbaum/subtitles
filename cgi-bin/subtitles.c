@@ -1,6 +1,5 @@
 /*subtitles.c - a CGI program that returns a subtitle file*/
 #include "csapp.h"
-#include <regex.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 
@@ -41,18 +40,32 @@ char* XMLParser(char* file){
 }
 
 int main() {
-  /*
-  char* url = "file.//localhost/Users/rivkagreenberg/Documents/signup-submit.php?name=The+dark+night";
-  char *buf, *p;
-  char arg1[MAXLINE], content[MAXLINE];
-  int n1=0, n2 = 0;
+  char *buf, *p, *title1, title2;
+  buf = malloc(MAXLINE);
+  title1 = malloc(MAXLINE);
+  title2 = malloc(MAXLINE);
 
-  /* Extract the two arguments 
+  /* Extract the movie title */ 
   if ((buf = getenv("QUERY_STRING")) != NULL) {
-    printf("%s", arg1);
+    p = strchr(buf, '=');
+    strcpy(title1, p+1);
+    while(*title1 != '\0'){
+      if (*title1 == ' '){
+	*title2 = '-';
+      }
+      else{
+	*title2 = *title1;
+      }
+      title1 ++;
+      title2 ++;
+    }
+    
+
+    
+    printf("%s", title2);
 	
   }
-  */
+  
   
 
   rio_t rio;
@@ -64,7 +77,12 @@ int main() {
   clientfd = Open_clientfd(host, port);
   Rio_readinitb(&rio, clientfd);
   
-  char *getRequest = "GET http://subsmax.com/api/10/Snow-White HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n";
+  char *getRequest = "GET http://subsmax.com/api/10/";
+  strcat(getrequest, title2);
+  strcat(getrequest, " HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n";
+	 
+  printf("Content-type: text/html\r\n\r\n");
+	 
   Rio_writen(clientfd, getRequest, strlen(getRequest));
   char result[100000];
   char buf[1000];
