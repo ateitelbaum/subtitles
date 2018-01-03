@@ -40,7 +40,7 @@ char* XMLParser(char* file){
 }
 
 int main() {
-  char *buf, *p, *title1, title2;
+  char *buf, *p, *title1, *title2;
   buf = malloc(MAXLINE);
   title1 = malloc(MAXLINE);
   title2 = malloc(MAXLINE);
@@ -63,7 +63,7 @@ int main() {
 
     
     printf("%s", title2);
-	
+    free(buf);
   }
   
   
@@ -77,22 +77,22 @@ int main() {
   clientfd = Open_clientfd(host, port);
   Rio_readinitb(&rio, clientfd);
   
-  char *getRequest = "GET http://subsmax.com/api/10/";
+  char *getrequest = "GET http://subsmax.com/api/10/";
   strcat(getrequest, title2);
-  strcat(getrequest, " HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n";
+  strcat(getrequest, " HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n");
 	 
   printf("Content-type: text/html\r\n\r\n");
 	 
-  Rio_writen(clientfd, getRequest, strlen(getRequest));
+  Rio_writen(clientfd, getrequest, strlen(getrequest));
   char result[100000];
-  char buf[1000];
+  char buf2[1000];
   int j;
   for(j=0; j<14; j++){
-    Rio_readlineb(&rio, buf, 1000);
+    Rio_readlineb(&rio, buf2, 1000);
   }
-  while(Rio_readlineb(&rio, buf, 1000)){
-    if (buf[0] != '0'){
-	strcat(result, buf);
+  while(Rio_readlineb(&rio, buf2, 1000)){
+    if (buf2[0] != '0'){
+	strcat(result, buf2);
       }
   }
   char* l = XMLParser(result);
