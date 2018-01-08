@@ -143,7 +143,6 @@ int main() {
       Rio_readlineb(&rio, buf3, MAXLINE);
       Rio_readlineb(&rio, buf3, MAXLINE);
       strcpy(newline, buf3);
-      printf("%s", result2);
       char *start = memchr(result2, 'h', 100) +6;
       char *stop = memchr(start, '"', 100);
       memcpy(l, start, stop-start);
