@@ -87,7 +87,8 @@ int main() {
       title1++;
       p++;
     }
- 
+
+
   rio_t rio;
 
   char *host = "subsmax.com";
@@ -98,6 +99,7 @@ int main() {
   clientfd = Open_clientfd(host, port);
   Rio_readinitb(&rio, clientfd);
 
+  /*Send GET request to the API*/
 
   strcpy(getrequest, "GET http://subsmax.com/api/10/en-");
   strcat(getrequest, title2);
@@ -150,7 +152,7 @@ int main() {
     }
   }
 
-  
+  /*Return subtitles on screen*/
   
   printf("<!DOCTYPE html>\n<html>\n<body style=\"background-color:black;\">\n<h1 style=\"color:red;\">Click on the link below for your subtitles!</h1>\n<img src=\"http://portugalresident.com/sites/default/files/field/image/t-hill-s-top-movies-of-2011-so-far-.jpg\" width=\"316\" height=\"272\">\n<p></p>\n<a style=\"font-size: 50px; color:red;\" href=\"");
   printf("%s", l);
