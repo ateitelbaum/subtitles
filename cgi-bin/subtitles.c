@@ -87,9 +87,7 @@ int main() {
       title1++;
       p++;
     }
-  
-    
-
+ 
   rio_t rio;
 
   char *host = "subsmax.com";
@@ -101,7 +99,7 @@ int main() {
   Rio_readinitb(&rio, clientfd);
 
 
-  strcpy(getrequest, "GET http://subsmax.com/api/10/");
+  strcpy(getrequest, "GET http://subsmax.com/api/10/en-");
   strcat(getrequest, title2);
   strcat(getrequest, " HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n");
   
@@ -119,6 +117,42 @@ int main() {
   }
   
   char* l = XMLParser(result);
+  
+  /* getting html */
+  char *htmlRequest;
+  htmlRequest = calloc("\0",MAXLINE);
+  strcpy(htmlRequest, "GET ");
+  strcat(htmlRequest, l);
+  strcat(htmlRequest, "/index.html HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n");
+  clientfd = Open_clientfd(host, port);
+  Rio_readinitb(&rio, clientfd);
+  Rio_writen(clientfd, htmlRequest, strlen(htmlRequest));
+  char *buf3;
+  char *result2;
+  buf3 = malloc(MAXLINE);
+  result2 = malloc(MAXLINE);
+  for(j=0; j<14; j++){
+    Rio_readlineb(&rio, buf3, 1000);
+  }
+
+  /* parsing html */
+  while(Rio_readlineb(&rio, buf3, MAXLINE)){
+    if (buf3[12] == '<' && buf3[13] == 'B'){
+      strcpy(result2, buf3);
+      char *newline = strrchr(result2, '\n');
+      Rio_readlineb(&rio, buf3, MAXLINE);
+      Rio_readlineb(&rio, buf3, MAXLINE);
+      strcpy(newline, buf3);
+      printf("%s", result2);
+      char *start = memchr(result2, 'h', 100) +6;
+      char *stop = memchr(start, '"', 100);
+      memcpy(l, start, stop-start);
+      break;
+    }
+  }
+
+  
+  
   printf("<!DOCTYPE html>\n<html>\n<body style=\"background-color:black;\">\n<h1 style=\"color:red;\">Click on the link below for your subtitles!</h1>\n<img src=\"http://portugalresident.com/sites/default/files/field/image/t-hill-s-top-movies-of-2011-so-far-.jpg\" width=\"316\" height=\"272\">\n<p></p>\n<a style=\"font-size: 50px; color:red;\" href=\"");
   printf("%s", l);
   printf("\">Retrieve your Subtitles</a>\n</body>\n</html>");
