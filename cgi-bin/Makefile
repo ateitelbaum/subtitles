@@ -9,7 +9,7 @@ LIBS=""
 all: subtitles  
 
 subtitles: subtitles.c
-	gcc -Wall -O2 -I ../../../../include -I . $(CFLAGS) -L ../libxml2/lib  subtitles.c ../../../../src/csapp.o -lpthread -lxml2 -o subtitles 
+	gcc -Wall -O2 -I ../../../../include -I . $(CFLAGS) -L ../libxml2/lib  subtitles.c csapp.o -lpthread -lxml2 -o subtitles 
 
 
 clean:
