@@ -119,7 +119,9 @@ int main() {
   }
   
   char* l = XMLParser(result);
+  printf("<!DOCTYPE html>\n<html>\n<body style=\"background-color:black;\">\n<h1 style=\"color:red;\">Click on the link below for your subtitles!</h1>\n<img src=\"http://portugalresident.com/sites/default/files/field/image/t-hill-s-top-movies-of-2011-so-far-.jpg\" width=\"316\" height=\"272\">\n<p></p>\n<a style=\"font-size: 50px; color:red;\" href=\"");
   printf("%s", l);
+  printf("\">Retrieve your Subtitles</a>\n</body>\n</html>");
   
   exit(0);
 }
