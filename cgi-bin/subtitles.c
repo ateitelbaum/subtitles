@@ -1,9 +1,13 @@
 /*subtitles.c - a CGI program that returns a subtitle file*/
 #include "csapp.h"
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
+#include <stdio.h>
+#include <regex.h>
+#include <string.h>
+/* #include <libxml/xmlmemory.h>
+   #include <libxml/parser.h>*/
 
 /* finds element in the XML doc and returns cur pointing to it */
+/*
 char* elementExtracter(xmlNodePtr cur, char* element){
   cur = cur->xmlChildrenNode;
   while (cur != NULL){
@@ -17,56 +21,77 @@ char* elementExtracter(xmlNodePtr cur, char* element){
 
 char* XMLParser(char* file){
   xmlDocPtr doc;
-  xmlNodePtr cur;
+  xmlNodePtr cur; */
+
+
 /* loads the string into a tree */
-  doc = xmlParseDoc(file);
+/*
+doc = xmlParseDoc(file);
   if (doc == NULL){
     fprintf(stderr, "Document not parsed successfully.");
     return;
   }
+*/
+
 /* gets a pointer to the root of the tree */
-  cur = xmlDocGetRootElement(doc);
+
+/*
+cur = xmlDocGetRootElement(doc);
   if (cur == NULL){
     fprintf(stderr, "empty document\n");
     xmlFreeDoc(doc);
     return;
   }
+*/
+
 /* goes through tree */ 
-  cur = elementExtracter(cur, "items");
+
+/*
+cur = elementExtracter(cur, "items");
   cur = elementExtracter(cur, "item");
   cur = elementExtracter(cur, "link");
+*/
+
 /* returns the content of the element link */
-  return (char*)xmlNodeGetContent(cur);
+
+/*
+return (char*)xmlNodeGetContent(cur);
 }
+*/
 
 int main() {
-  char *buf, *p, *title1, *title2;
-  buf = malloc(MAXLINE);
+  char *p, *title1;
+  char buf[MAXLINE], title2[MAXLINE], getrequest[MAXLINE];
   title1 = malloc(MAXLINE);
-  title2 = malloc(MAXLINE);
+  
+   printf("Content-type: text/html\r\n\r\n");
 
-  /* Extract the movie title */ 
-  if ((buf = getenv("QUERY_STRING")) != NULL) {
-    p = strchr(buf, '=');
+   
+  /* Extract the movie title */
+   if (getenv("QUERY_STRING") != NULL) strcpy(buf, getenv("QUERY_STRING"));
+   else strcpy(buf,"movietitle=foo+is+movie+");
+   p = strchr(buf,'=');
+   printf("%s,%s\n",buf,p);
+  
+   
     strcpy(title1, p+1);
+    
+    p = title2;
+   
     while(*title1 != '\0'){
-      if (*title1 == ' '){
-	*title2 = '-';
+      if (*title1 == '+'){
+	*p = '-';
       }
       else{
-	*title2 = *title1;
+	*p = *title1;
       }
-      title1 ++;
-      title2 ++;
+      title1++;
+      p++;
     }
     
-
-    
     printf("%s", title2);
-    free(buf);
-  }
   
-  
+    
 
   rio_t rio;
 
@@ -74,15 +99,17 @@ int main() {
   char *port = "80";
 
   int clientfd;
+  /*
   clientfd = Open_clientfd(host, port);
   Rio_readinitb(&rio, clientfd);
-  
-  char *getrequest = "GET http://subsmax.com/api/10/";
+*/
+
+  strcpy(getrequest, "GET http://subsmax.com/api/10/");
   strcat(getrequest, title2);
   strcat(getrequest, " HTTP/1.1\r\nHost:80.255.11.149\r\n\r\n\r\n");
-	 
-  printf("Content-type: text/html\r\n\r\n");
-	 
+  printf("%s", getrequest);
+  exit(0);
+  /*
   Rio_writen(clientfd, getrequest, strlen(getrequest));
   char result[100000];
   char buf2[1000];
@@ -95,7 +122,10 @@ int main() {
 	strcat(result, buf2);
       }
   }
-  char* l = XMLParser(result);
+  */
+  /* char* l = XMLParser(result);
   return l;
+  */
+  printf("test");
   exit(0);
 }
